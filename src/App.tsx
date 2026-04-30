@@ -6,6 +6,11 @@ import Header from './shared/components/Header'
 import './index.css'
 import { PrivateRoute } from './shared/components/PrivateRoute'
 import { ProductList } from './features/products/pages/ProductList'
+import { Suspense } from 'react'
+import { Spinner } from './shared/components/spinner'
+import { ProductDetail } from './features/products/pages/ProductDetail'
+
+
 
 
 export const AppRoute = () => {
@@ -20,13 +25,25 @@ export const AppRoute = () => {
         <Route
           path="/productos"
           element={
-            <PrivateRoute>
-              <Header />
-              <ProductList />
-            </PrivateRoute>
+            <Suspense fallback={<Spinner />}>
+              <PrivateRoute>
+                <Header />
+                <ProductList />
+              </PrivateRoute>
+            </Suspense>
           }
         />
-
+        <Route
+          path="/productos/:id"
+          element={
+            <Suspense fallback={<Spinner />}>
+              <PrivateRoute>
+                <Header />
+                <ProductDetail />
+              </PrivateRoute>
+            </Suspense>
+          }
+        />
         <Route path="/" element={<Navigate to="/auth" />} />
         <Route path="*" element={<div>404</div>} />
       </Routes>

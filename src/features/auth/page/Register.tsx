@@ -1,8 +1,11 @@
 import { Link } from "react-router"
 
 export default function Register() {
+  
+  
+  
   return (
-    <div className="overflow-hidden rounded-4xl border border-white/10 bg-white/[0.08] p-6 shadow-2xl shadow-black/30 backdrop-blur-xl md:p-8">
+    <div className="overflow-hidden rounded-4xl border border-white/10 bg-white/8 p-6 shadow-2xl shadow-black/30 backdrop-blur-xl md:p-8">
       <div className="mb-8 text-center">
         <span className="mb-4 inline-flex rounded-full border border-cyan-300/40 bg-cyan-300/10 px-4 py-1 text-sm font-semibold text-cyan-100">
           Nueva cuenta
