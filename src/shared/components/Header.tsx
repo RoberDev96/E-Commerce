@@ -1,8 +1,10 @@
 import { useAuth } from '../../features/auth/context/useAuth'
+import { useCart } from '../../features/cart/context/cartContext'
 import { useNavigate } from 'react-router'
 
 export default function Header() {
   const { user, logout } = useAuth()
+  const { totalItems } = useCart()
   const navigate = useNavigate()
 
   const handleLogout = () => {
@@ -29,6 +31,33 @@ export default function Header() {
         </button>
 
         <div className="flex items-center gap-3">
+          <button
+            type="button"
+            onClick={() => navigate('/carrito')}
+            className="relative flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/10 text-cyan-100 transition hover:border-cyan-200/50 hover:bg-cyan-300/15 focus:outline-none focus:ring-2 focus:ring-cyan-200"
+            aria-label={`Carrito de compras con ${totalItems} productos`}
+            title="Carrito de compras"
+          >
+            <svg
+              className="h-5 w-5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              aria-hidden="true"
+            >
+              <circle cx="8" cy="21" r="1" />
+              <circle cx="19" cy="21" r="1" />
+              <path d="M2.05 2.05h2l2.66 12.42a2 2 0 0 0 2 1.58h9.78a2 2 0 0 0 1.95-1.57l1.65-7.43H5.12" />
+            </svg>
+            {totalItems > 0 && (
+              <span className="absolute -right-1 -top-1 flex min-h-5 min-w-5 items-center justify-center rounded-full bg-cyan-300 px-1.5 text-xs font-black text-slate-950">
+                {totalItems}
+              </span>
+            )}
+          </button>
           {user ? (
             <>
               <span className="hidden rounded-full border border-white/10 bg-white/10 px-4 py-2 text-sm font-semibold text-slate-200 sm:inline-flex">

@@ -1,5 +1,5 @@
-import { usuariosRegistrados } from '../../../shared/utils/constantes'
 import { sleep } from '../../../shared/utils/sleep'
+import { getAuthUsers } from './authStorage'
 
 interface AuthUser {
   id: number
@@ -18,8 +18,10 @@ export const authservice = async (usuario: string, password: string): Promise<Au
   await sleep(1500)
    
 
-  const userFound = usuariosRegistrados.find((user) => (
-    usuario === user.name
+  const normalizedUsuario = usuario.trim().toLowerCase()
+  const userFound = getAuthUsers().find((user) => (
+    normalizedUsuario === user.name.toLowerCase() ||
+    normalizedUsuario === user.email.toLowerCase()
   ))
     if (!userFound) {
       throw new Error('Usuario no Encontrado')
